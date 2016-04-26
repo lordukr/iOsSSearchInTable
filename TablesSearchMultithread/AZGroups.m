@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  AZGroups.m
 //  TablesSearchMultithread
 //
 //  Created by My mac on 26.04.16.
 //  Copyright © 2016 Anatolii Zavialov. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AZGroups.h"
 
-@interface ViewController : UIViewController
-
+@implementation AZGroups
 
 @end
-
