@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		1F5AD86B1CCFD53600F4CDCC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD86A1CCFD53600F4CDCC /* main.m */; };
 		1F5AD86E1CCFD53600F4CDCC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD86D1CCFD53600F4CDCC /* AppDelegate.m */; };
-		1F5AD8741CCFD53600F4CDCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F5AD8721CCFD53600F4CDCC /* Main.storyboard */; };
 		1F5AD8761CCFD53600F4CDCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5AD8751CCFD53600F4CDCC /* Assets.xcassets */; };
 		1F5AD8791CCFD53600F4CDCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F5AD8771CCFD53600F4CDCC /* LaunchScreen.storyboard */; };
 		1F5AD8821CCFD5C900F4CDCC /* AZTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD8811CCFD5C900F4CDCC /* AZTableViewController.m */; };
 		1F5AD8851CCFD5F100F4CDCC /* AZGroups.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD8841CCFD5F100F4CDCC /* AZGroups.m */; };
 		1F5AD8881CCFDEC800F4CDCC /* AZStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD8871CCFDEC800F4CDCC /* AZStudent.m */; };
+		1F888A551CE5D95000B6115C /* AZTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F888A541CE5D95000B6115C /* AZTableViewCell.m */; };
+		1F9063301CD4D7A00005A99D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F90632F1CD4D7A00005A99D /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,7 +23,6 @@
 		1F5AD86A1CCFD53600F4CDCC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1F5AD86C1CCFD53600F4CDCC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1F5AD86D1CCFD53600F4CDCC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1F5AD8731CCFD53600F4CDCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1F5AD8751CCFD53600F4CDCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F5AD8781CCFD53600F4CDCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F5AD87A1CCFD53600F4CDCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -32,6 +32,9 @@
 		1F5AD8841CCFD5F100F4CDCC /* AZGroups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZGroups.m; sourceTree = "<group>"; };
 		1F5AD8861CCFDEC800F4CDCC /* AZStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZStudent.h; sourceTree = "<group>"; };
 		1F5AD8871CCFDEC800F4CDCC /* AZStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZStudent.m; sourceTree = "<group>"; };
+		1F888A531CE5D95000B6115C /* AZTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZTableViewCell.h; sourceTree = "<group>"; };
+		1F888A541CE5D95000B6115C /* AZTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZTableViewCell.m; sourceTree = "<group>"; };
+		1F90632F1CD4D7A00005A99D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +71,6 @@
 				1F5AD86D1CCFD53600F4CDCC /* AppDelegate.m */,
 				1F5AD8801CCFD5C900F4CDCC /* AZTableViewController.h */,
 				1F5AD8811CCFD5C900F4CDCC /* AZTableViewController.m */,
-				1F5AD8721CCFD53600F4CDCC /* Main.storyboard */,
 				1F5AD8751CCFD53600F4CDCC /* Assets.xcassets */,
 				1F5AD8771CCFD53600F4CDCC /* LaunchScreen.storyboard */,
 				1F5AD87A1CCFD53600F4CDCC /* Info.plist */,
@@ -77,6 +79,9 @@
 				1F5AD8841CCFD5F100F4CDCC /* AZGroups.m */,
 				1F5AD8861CCFDEC800F4CDCC /* AZStudent.h */,
 				1F5AD8871CCFDEC800F4CDCC /* AZStudent.m */,
+				1F90632F1CD4D7A00005A99D /* Main.storyboard */,
+				1F888A531CE5D95000B6115C /* AZTableViewCell.h */,
+				1F888A541CE5D95000B6115C /* AZTableViewCell.m */,
 			);
 			path = TablesSearchMultithread;
 			sourceTree = "<group>";
@@ -146,9 +151,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F9063301CD4D7A00005A99D /* Main.storyboard in Resources */,
 				1F5AD8791CCFD53600F4CDCC /* LaunchScreen.storyboard in Resources */,
 				1F5AD8761CCFD53600F4CDCC /* Assets.xcassets in Resources */,
-				1F5AD8741CCFD53600F4CDCC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F888A551CE5D95000B6115C /* AZTableViewCell.m in Sources */,
 				1F5AD8851CCFD5F100F4CDCC /* AZGroups.m in Sources */,
 				1F5AD8821CCFD5C900F4CDCC /* AZTableViewController.m in Sources */,
 				1F5AD8881CCFDEC800F4CDCC /* AZStudent.m in Sources */,
@@ -170,14 +176,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1F5AD8721CCFD53600F4CDCC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1F5AD8731CCFD53600F4CDCC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		1F5AD8771CCFD53600F4CDCC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -312,6 +310,7 @@
 				1F5AD87F1CCFD53600F4CDCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

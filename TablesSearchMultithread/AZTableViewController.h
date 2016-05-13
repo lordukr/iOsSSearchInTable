@@ -10,6 +10,8 @@
 
 @interface AZTableViewController : UITableViewController
 
-@property (weak, nonatomic) IBOutlet UISearchBar* searchBar;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
+- (IBAction)segmentedControlAction:(UISegmentedControl *)sender;
 
 @end
