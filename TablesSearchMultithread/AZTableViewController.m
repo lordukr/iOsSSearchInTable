@@ -38,13 +38,12 @@ typedef enum {
     self.studentsArray = [NSMutableArray array];
     self.groupsArray = [NSMutableArray array];
     
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 100000; i++) {
         [tempArray addObject:[AZStudent randomStudent]];
     }
+    self.studentsArray = tempArray;
     
-    self.studentsArray = [self sortArray:tempArray];
-    
-    [self createSectionsAsync:self.studentsArray :self.searchBar.text];
+    [self createSectionsAsync:self.studentsArray andFilterText:self.searchBar.text];
     
 }
 
@@ -55,20 +54,22 @@ typedef enum {
 
 #pragma mark - Private Methods
 
-- (void) createSectionsAsync:(NSArray*) array :(NSString*)filterString {
+- (void) createSectionsAsync:(NSArray*) array andFilterText:(NSString*)filterString {
     
     [self.currentOperation cancel];
-    NSLog(@"sections async start");
+    
+    __weak NSArray* weakStudents = self.studentsArray;
+    self.studentsArray = [self sortArray:weakStudents];
+    
     __weak AZTableViewController* weakSelf = self;
     
     self.currentOperation = [NSBlockOperation blockOperationWithBlock:^{
         
-        NSArray* sections = [weakSelf createSectionsArray:self.studentsArray andFilter:filterString];
+        [weakSelf createSectionsFromArray:self.studentsArray andFilterString:filterString];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.groupsArray = sections;
             [self.tableView reloadData];
-            NSLog(@"sections async end");
+    
             self.currentOperation = nil;
         });
         
@@ -77,28 +78,22 @@ typedef enum {
     [self.currentOperation start];
 }
 
-- (NSArray*) createSectionsArray:(NSArray*) array andFilter:(NSString*) filterText {
+- (void) createSectionsFromArray:(NSArray*) array andFilterString:(NSString*) filterText {
     NSMutableArray* arraySections = [NSMutableArray array];
     
     NSString* currentValue = nil;
     
     for (AZStudent* student in array) {
-        
-        
-        if (filterText.length > 0 && [student.firstName rangeOfString:filterText].location == NSNotFound) {
-            continue;
-        } else if (filterText.length > 0 && [student.lastName rangeOfString:filterText].location == NSNotFound) {
-            continue;
-        }
-        
         NSString* firstValue = nil;
         AZGroups* group = nil;
-        
+        NSString* currentTextToFilter;
         switch (self.segmentValue) {
             case FirstNameType:
+                currentTextToFilter = student.firstName;
                 firstValue = [student.firstName substringToIndex:1];
                 break;
             case LastNameType:
+                currentTextToFilter = student.lastName;
                 firstValue = [student.lastName substringToIndex:1];
                 break;
             case BirthdateType:
@@ -107,6 +102,10 @@ typedef enum {
                 
             default:
                 break;
+        }
+        
+        if (filterText.length > 0 && [currentTextToFilter rangeOfString:filterText].location == NSNotFound) {
+            continue;
         }
         
         if (![currentValue isEqualToString:firstValue]) {
@@ -128,25 +127,30 @@ typedef enum {
         [group.groupItems addObject:student];
     }
     
-    return arraySections;
+    self.groupsArray = arraySections;
 }
 
 - (NSArray*) sortArray:(NSArray*) array {
-    NSLog(@"sort start");
     NSMutableArray* tempArray = [NSMutableArray arrayWithArray:array];
-    //NSMutableArray* sortDescriptors = [NSMutableArray array];
     
-    NSSortDescriptor* firstNameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
-    NSSortDescriptor* lastNameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
-    NSSortDescriptor* birthDescriptor = [[NSSortDescriptor alloc] initWithKey:@"birthDate" ascending:YES];
+    NSSortDescriptor* sortDescriptor;
     
-    [tempArray sortUsingDescriptors:@[firstNameSortDescriptor, lastNameSortDescriptor, birthDescriptor]];
-    
-    
-    NSLog(@"sort end");
-    for (AZStudent* student in tempArray) {
-        NSLog(@"%@ %@", student.firstName, student.lastName);
+    switch (self.segmentValue) {
+        case FirstNameType:
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
+            break;
+        case LastNameType:
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
+            break;
+        case BirthdateType:
+             sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"birthDate" ascending:YES];
+            break;
+            
+        default:
+            break;
     }
+    
+    [tempArray sortUsingDescriptors:@[sortDescriptor]];
     
     return tempArray;
 }
@@ -186,11 +190,9 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   // static NSString* identifier = @"cellIdentifier";
     static NSString* identifier = @"AZTableViewCell";
     
     AZTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (!cell) {
         cell = [[AZTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
@@ -216,12 +218,12 @@ typedef enum {
     [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
     self.searchBar.text = nil;
-    self.groupsArray = [NSMutableArray arrayWithArray:[self createSectionsArray:self.studentsArray andFilter:self.searchBar.text]];
+    [self createSectionsFromArray:self.studentsArray andFilterString:searchBar.text];
     [self.tableView reloadData];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    self.groupsArray = [NSMutableArray arrayWithArray:[self createSectionsArray:self.studentsArray andFilter:searchText]];
+    [self createSectionsFromArray:self.studentsArray andFilterString:searchText];
     [self.tableView reloadData];
 }
 
@@ -232,7 +234,8 @@ typedef enum {
     NSInteger selectedValue = sender.selectedSegmentIndex;
     self.segmentValue = selectedValue;
     
-    self.groupsArray = [NSMutableArray arrayWithArray:[self createSectionsArray:self.studentsArray andFilter:self.searchBar.text]];
+    [self createSectionsAsync:self.studentsArray andFilterText:self.searchBar.text];
+    
     [self.tableView reloadData];
     
 }
